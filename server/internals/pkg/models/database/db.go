@@ -12,8 +12,10 @@ var DBE *gorm.DB
 func CreateDBEngine() {
 	dbType := config.ConfValue.DBType
 	if dbType == "pgsql" {
+		pgsql.InitPgsqlDB()
 		DBE = pgsql.Eloquent
 	} else if dbType == "mysql" {
+		mysql.InitMysqlDB()
 		DBE = mysql.Eloquent
 	}
 }

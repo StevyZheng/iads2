@@ -16,7 +16,7 @@ var serverCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		println("iads api server is running...")
 		//defer database.DBE.Close()
-		sys.DBInit()
+		sys.ModelInit()
 		router := routers.InitRouter()
 		_ = router.Run(":80")
 	},

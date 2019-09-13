@@ -2,7 +2,6 @@ package hardware
 
 import (
 	"github.com/emirpasic/gods/lists/arraylist"
-	"github.com/vishvananda/netlink"
 )
 
 type NetInfo struct {
@@ -18,6 +17,6 @@ type NetInfo struct {
 }
 
 func (e *NetInfo) NetInit() (err error) {
-	_, err = netlink.LinkList()
+	//_, err = netlink.LinkList()
 	return
 }

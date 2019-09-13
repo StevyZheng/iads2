@@ -5,7 +5,6 @@ import (
 	_ "github.com/go-sql-driver/mysql" //加载mysql
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"iads/server/pkg/config"
 	"sync"
 	"time"
 )
@@ -25,13 +24,13 @@ func GetInstance() *ConnectPool {
 	return instance
 }
 
-func init() {
+/*func init() {
 	if config.ConfValue.DBType == "mysql" {
-		initMysqlDB()
+		InitMysqlDB()
 	}
-}
+}*/
 
-func initMysqlDB() {
+func InitMysqlDB() {
 	//Eloquent, err := xorm.NewEngine("mysql", "root:000000@tcp(127.0.0.1:3306)/rs?charset=utf8&parseTime=True&loc=Local&timeout=50ms")
 	//Eloquent, err = gorm.Open("postgres", "host=127.0.0.1 user=postgres dbname=rs sslmode=disable password=000000")
 	Eloquent, err := gorm.Open("mysql", "root:000000@tcp(127.0.0.1:3306)/rs?charset=utf8&parseTime=True&loc=Local&timeout=50ms")
@@ -58,7 +57,7 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 				_ = createTimeField.Set(nowTime)
 			}
 		}
-		
+
 		if modifyTimeField, ok := scope.FieldByName("UpdatedAt"); ok {
 			if modifyTimeField.IsBlank {
 				_ = modifyTimeField.Set(nowTime)
@@ -80,10 +79,10 @@ func deleteCallback(scope *gorm.Scope) {
 		if str, ok := scope.Get("gorm:delete_option"); ok {
 			extraOption = fmt.Sprint(str)
 		}
-		
+
 		//deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedAt")
 		deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedTempAt")
-		
+
 		if !scope.Search.Unscoped && hasDeletedOnField {
 			scope.Raw(fmt.Sprintf(
 				"UPDATE %v SET %v=%v%v%v",
@@ -110,4 +109,3 @@ func addExtraSpaceIfExist(str string) string {
 	}
 	return ""
 }
-

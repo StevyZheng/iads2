@@ -5,7 +5,7 @@ import (
 	"iads/server/pkg/config"
 )
 
-func DBInit() {
+func ModelInit() {
 	database.CreateDBEngine()
 	if config.ConfValue.DBType == "mysql" {
 		database.DBE.Set("gorm:table_options", "DEFAULT CHARSET=utf8 AUTO_INCREMENT=1").AutoMigrate(&Role{}, &User{})

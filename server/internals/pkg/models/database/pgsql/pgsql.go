@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"iads/server/pkg/config"
 	"sync"
 	"time"
 )
@@ -23,13 +22,13 @@ func GetInstance() *ConnectPool {
 	return instance
 }
 
-func init() {
+/*func init() {
 	if config.ConfValue.DBType == "pgsql" {
-		initPgsqlDB()
+		InitPgsqlDB()
 	}
-}
+}*/
 
-func initPgsqlDB() {
+func InitPgsqlDB() {
 	var err error
 	Eloquent, err = gorm.Open("postgres", "host=192.168.0.100 user=postgres dbname=iads sslmode=disable password=000000")
 	if err != nil || Eloquent.Error != nil {
