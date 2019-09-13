@@ -31,9 +31,11 @@ func init() {
 
 func initPgsqlDB() {
 	var err error
-	Eloquent, err = gorm.Open("postgres", "host=127.0.0.1 user=postgres dbname=rs sslmode=disable password=000000")
+	Eloquent, err = gorm.Open("postgres", "host=192.168.0.100 user=postgres dbname=iads sslmode=disable password=000000")
 	if err != nil || Eloquent.Error != nil {
 		fmt.Printf("pgsql connect error %v", err)
+	} else {
+		println("pgsql connection is OK.")
 	}
 	Eloquent.DB().SetMaxIdleConns(1024)
 	Eloquent.DB().SetMaxOpenConns(10240)
@@ -55,7 +57,7 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 				_ = createTimeField.Set(nowTime)
 			}
 		}
-		
+
 		if modifyTimeField, ok := scope.FieldByName("UpdatedAt"); ok {
 			if modifyTimeField.IsBlank {
 				_ = modifyTimeField.Set(nowTime)
@@ -77,10 +79,10 @@ func deleteCallback(scope *gorm.Scope) {
 		if str, ok := scope.Get("gorm:delete_option"); ok {
 			extraOption = fmt.Sprint(str)
 		}
-		
+
 		//deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedAt")
 		deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedTempAt")
-		
+
 		if !scope.Search.Unscoped && hasDeletedOnField {
 			scope.Raw(fmt.Sprintf(
 				"UPDATE %v SET %v=%v%v%v",

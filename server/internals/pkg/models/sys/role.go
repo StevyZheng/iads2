@@ -18,8 +18,8 @@ func (r Role) RoleGetFromID(id uint64) (role Role, err error) {
 	return
 }
 
-func (r Role) RoleGetFromName() (role Role, err error) {
-	if err = database.DBE.Where("role_name = ?", r.RoleName).First(&role).Error; err != nil {
+func (r Role) RoleGetFromName(roleName string) (role Role, err error) {
+	if err = database.DBE.Where("role_name = ?", roleName).First(&role).Error; err != nil {
 		return
 	}
 	return
@@ -62,4 +62,3 @@ func (r Role) RoleDestroy(id uint64) (role Role, err error) {
 	role = r
 	return
 }
-

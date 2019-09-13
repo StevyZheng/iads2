@@ -7,9 +7,10 @@ import (
 )
 
 type Conf struct {
-	DBType     string
-	UploadPath string
-	OSType     string
+	DBType       string
+	UploadPath   string
+	DownloadPath string
+	OSType       string
 }
 
 var CodeMap map[int64]string
@@ -24,6 +25,8 @@ func init() {
 	}
 	ConfValue.DBType = "pgsql"
 	ConfValue.OSType = "windows"
+	ConfValue.UploadPath = "C:\\Users\\Stevy\\Desktop\\"
+	ConfValue.DownloadPath = "C:\\Users\\Stevy\\Desktop\\"
 }
 
 func JsonRequest(c *gin.Context, code int64, data interface{}, err error) {

@@ -18,7 +18,7 @@ var testCmd = &cobra.Command{
 }
 
 var commonCmd = &cobra.Command{
-	Use:   "common",
+	Use:   "initer",
 	Short: "test",
 	Run: func(cmd *cobra.Command, args []string) {
 		/*ssh := base.NewSsh("www.roycom.com.cn", "root", "roycom000000")
@@ -34,9 +34,8 @@ var commonCmd = &cobra.Command{
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "run roycom common server test",
+	Short: "run roycom initer server test",
 	Run: func(cmd *cobra.Command, args []string) {
-	
+
 	},
 }
-

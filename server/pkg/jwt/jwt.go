@@ -22,10 +22,10 @@ var (
 
 // 载荷，可以加一些自己需要的信息
 type CustomClaims struct {
-	UserID   int64  `json:"user_id"`
+	UserID   uint64 `json:"user_id"`
 	UserName string `json:"user_name"`
 	Email    string `json:"email"`
-	RoleID   int64  `json:"role_id"`
+	RoleID   uint64 `json:"role_id"`
 	jwt.StandardClaims
 }
 
@@ -96,4 +96,3 @@ func (j *JWT) RefreshToken(tokenString string) (string, error) {
 	}
 	return "", TokenInvalid
 }
-
