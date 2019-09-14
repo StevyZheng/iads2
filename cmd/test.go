@@ -30,6 +30,7 @@ var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "run roycom initer server test",
 	Run: func(cmd *cobra.Command, args []string) {
-
+		n := hardware.NetInfo{}
+		_ = n.NetInit()
 	},
 }
